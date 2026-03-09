@@ -6,7 +6,7 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
-## 🚀 Technical Highlights
+## Technical Highlights
 
 * **Unified Codebase:** 100% Kotlin code sharing for UI, business logic, and data layers.
 * **Offline-First Strategy:** Local persistence using **Room KMP** with custom type converters for complex data structures.
@@ -17,7 +17,7 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Component | Technology |
 | :--- | :--- |
@@ -30,7 +30,7 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
-## 🏗 Architecture Overview
+## Architecture Overview
 
 The project is structured into three distinct layers to maintain separation of concerns:
 
@@ -40,7 +40,7 @@ The project is structured into three distinct layers to maintain separation of c
 
 ---
 
-## ⚙️ Development Setup
+## Development Setup
 
 ### Prerequisites
 * Android Studio Ladybug or later.
@@ -57,7 +57,7 @@ The project is structured into three distinct layers to maintain separation of c
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Harsh Somankar**
 * **GitHub:** [@harshsomankar123-tech](https://github.com/harshsomankar123-tech)
