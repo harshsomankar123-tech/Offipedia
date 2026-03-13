@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Offipedia</string>
+    <string name="search_hint">Search for books...</string>
+    <string name="close_hint">Close search</string>
+    <string name="search_results">Search Results</string>
+    <string name="favorites">Favorites</string>
+    <string name="pages">pages</string>
+    <string name="rating">Rating</string>
+    <string name="languages">Languages</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="error_no_internet">No internet connection.</string>
+    <string name="error_serialization">Failed to parse data.</string>
+    <string name="error_disk_full">Disk is full.</string>
+    <string name="error_unknown">An unknown error occurred.</string>
+</resources>
