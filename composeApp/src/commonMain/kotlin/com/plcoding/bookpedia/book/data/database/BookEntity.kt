@@ -15,5 +15,6 @@ data class BookEntity(
     val ratingsAverage: Double?,
     val ratingsCount: Int?,
     val numPages: Int?,
-    val numEditions: Int
+    val numEditions: Int,
+    val coverEditionKey: String?
 )

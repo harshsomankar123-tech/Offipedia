@@ -54,7 +54,12 @@ fun BookDetailScreenRoot(
                 is BookDetailAction.OnBackClick -> onBackClick()
                 is BookDetailAction.OnReadClick -> {
                     state.book?.let { book ->
-                        uriHandler.openUri("https://openlibrary.org${book.id}")
+                        val url = if (book.coverEditionKey != null) {
+                            "https://openlibrary.org/books/${book.coverEditionKey}/read"
+                        } else {
+                            "https://openlibrary.org/works/${book.id}"
+                        }
+                        uriHandler.openUri(url)
                     }
                 }
                 else -> viewModel.onAction(action)
@@ -117,7 +122,14 @@ fun BookDetailScreen(
                         modifier = Modifier
                             .fillMaxSize()
                             .blur(20.dp),
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.Crop,
+                        onError = { /* Log */ }
+                    )
+                    // Fallback for blurred background
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
                     )
                     Box(
                         modifier = Modifier
@@ -152,7 +164,16 @@ fun BookDetailScreen(
                                 scaleY = imageScale.value
                                 rotationZ = imageRotation.value
                             },
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.Crop,
+                        onError = { /* Log */ }
+                    )
+                    // Placeholder for main image
+                    Box(
+                        modifier = Modifier
+                            .height(250.dp)
+                            .aspectRatio(0.65f)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.Gray.copy(alpha = 0.2f))
                     )
                 }
 

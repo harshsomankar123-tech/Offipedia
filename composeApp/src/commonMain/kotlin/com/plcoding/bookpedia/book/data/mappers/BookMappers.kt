@@ -20,7 +20,8 @@ fun SearchedBookDto.toBook(): Book {
         averageRating = ratings_average,
         ratingCount = ratings_count,
         numPages = number_of_pages_median,
-        numEditions = edition_count ?: 0
+        numEditions = edition_count ?: 0,
+        coverEditionKey = cover_edition_key
     )
 }
 
@@ -36,7 +37,8 @@ fun Book.toBookEntity(): BookEntity {
         ratingsAverage = averageRating,
         ratingsCount = ratingCount,
         numPages = numPages,
-        numEditions = numEditions
+        numEditions = numEditions,
+        coverEditionKey = coverEditionKey
     )
 }
 
@@ -52,6 +54,7 @@ fun BookEntity.toBook(): Book {
         averageRating = ratingsAverage,
         ratingCount = ratingsCount,
         numPages = numPages,
-        numEditions = numEditions
+        numEditions = numEditions,
+        coverEditionKey = coverEditionKey
     )
 }

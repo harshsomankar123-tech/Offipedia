@@ -26,6 +26,7 @@ val sharedModule = module {
     single {
         get<FavoriteBookDatabaseFactory>().create()
             .setDriver(BundledSQLiteDriver())
+            .fallbackToDestructiveMigration()
             .build()
     }
     single { get<FavoriteBookDatabase>().dao }

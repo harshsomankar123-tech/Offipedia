@@ -10,6 +10,9 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.paparazzi)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
@@ -33,6 +36,19 @@ kotlin {
     }
 
     jvm("desktop")
+
+    sourceSets {
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.koin.test)
+        }
+        androidUnitTest.dependencies {
+            implementation(libs.kotlin.test.junit)
+            implementation(libs.junit)
+            implementation(libs.robolectric)
+            implementation(libs.mockk.android)
+        }
+    }
 
     room {
         schemaDirectory("$projectDir/schemas")
@@ -107,6 +123,7 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     packaging {
         resources {
@@ -122,10 +139,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 }
 
 compose.desktop {

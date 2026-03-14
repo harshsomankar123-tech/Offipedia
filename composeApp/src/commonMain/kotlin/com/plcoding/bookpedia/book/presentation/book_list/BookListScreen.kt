@@ -74,14 +74,20 @@ fun BookListScreen(
             .statusBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(Res.drawable.logo_offipedia),
-            contentDescription = "Offipedia Logo",
+        Box(
             modifier = Modifier
-                .size(280.dp)
-                .padding(top = 16.dp),
-            contentScale = ContentScale.Fit
-        )
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 24.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(Res.drawable.logo_offipedia),
+                contentDescription = "Offipedia Logo",
+                modifier = Modifier
+                    .size(200.dp),
+                contentScale = ContentScale.Fit
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
         BookSearchBar(
             searchQuery = state.searchQuery,

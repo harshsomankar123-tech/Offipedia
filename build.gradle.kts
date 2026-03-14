@@ -9,4 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.room) apply false
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.paparazzi) apply false
+    alias(libs.plugins.kover) apply false
 }

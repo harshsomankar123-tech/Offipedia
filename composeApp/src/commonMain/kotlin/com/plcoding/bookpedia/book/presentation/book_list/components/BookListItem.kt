@@ -1,5 +1,6 @@
 package com.plcoding.bookpedia.book.presentation.book_list.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -52,7 +53,16 @@ fun BookListItem(
                     model = book.imageUrl,
                     contentDescription = book.title,
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    onLoading = { /* No-op, shown via background pulse or progress */ },
+                    onSuccess = { /* No-op */ },
+                    onError = { /* Log if needed */ }
+                )
+                // Add a simple colored background as placeholder
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.LightGray.copy(alpha = 0.2f))
                 )
             }
             Column(
