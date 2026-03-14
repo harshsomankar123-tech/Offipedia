@@ -1,5 +1,7 @@
 # Offipedia
 
+[![codecov](https://codecov.io/gh/harshsomankar123-tech/Offipedia/graph/badge.svg)](https://codecov.io/gh/harshsomankar123-tech/Offipedia)
+
 Offipedia is a cross-platform book discovery and management application built with **Compose Multiplatform**. It allows users to search the Open Library database, view detailed book information, and maintain a local collection of favorites that persist offline across **Android, iOS, and Desktop**.
 
 The project is architected with strict **Clean Architecture** principles and the **MVI (Model-View-Intent)** pattern, ensuring a scalable and testable codebase shared 100% across all platforms.
