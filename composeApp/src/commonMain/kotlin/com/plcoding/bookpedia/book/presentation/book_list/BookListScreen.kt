@@ -13,10 +13,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.presentation.book_list.components.BookList
@@ -59,6 +66,27 @@ fun BookListScreen(
     val searchResultsListState = androidx.compose.foundation.lazy.rememberLazyListState()
     val favoriteBooksListState = androidx.compose.foundation.lazy.rememberLazyListState()
 
+    val density = androidx.compose.ui.platform.LocalDensity.current
+    val maxHeaderHeight = 180.dp
+    val maxHeaderHeightPx = with(density) { maxHeaderHeight.toPx() }
+    var headerOffsetHeightPx by remember { mutableStateOf(0f) }
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(
+                available: Offset,
+                source: NestedScrollSource
+            ): Offset {
+                val delta = available.y
+                val newOffset = headerOffsetHeightPx + delta
+                val oldOffset = headerOffsetHeightPx
+                headerOffsetHeightPx = newOffset.coerceIn(-maxHeaderHeightPx, 0f)
+                val consumed = headerOffsetHeightPx - oldOffset
+                return Offset(0f, consumed)
+            }
+        }
+    }
+
     LaunchedEffect(state.selectedTabIndex) {
         pagerState.animateScrollToPage(state.selectedTabIndex)
     }
@@ -67,46 +95,59 @@ fun BookListScreen(
         onAction(BookListAction.OnTabSelected(pagerState.currentPage))
     }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .statusBarsPadding(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .statusBarsPadding()
+            .nestedScroll(nestedScrollConnection)
     ) {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(180.dp),
-            contentAlignment = Alignment.Center
+                .graphicsLayer {
+                    translationY = headerOffsetHeightPx
+                }
+                .zIndex(1f)
         ) {
-            Image(
-                painter = painterResource(Res.drawable.logo_offipedia),
-                contentDescription = "Offipedia Logo",
+            Box(
                 modifier = Modifier
-                    .fillMaxSize(),
-                contentScale = ContentScale.Crop
+                    .fillMaxWidth()
+                    .height(maxHeaderHeight),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(Res.drawable.logo_offipedia),
+                    contentDescription = "Offipedia Logo",
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            BookSearchBar(
+                searchQuery = state.searchQuery,
+                onSearchQueryChange = {
+                    onAction(BookListAction.OnSearchQueryChange(it))
+                },
+                onImeSearch = {
+                    keyboardController?.hide()
+                },
+                modifier = Modifier
+                    .widthIn(max = 400.dp)
+                    .fillMaxWidth()
+                    .padding(16.dp)
             )
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        BookSearchBar(
-            searchQuery = state.searchQuery,
-            onSearchQueryChange = {
-                onAction(BookListAction.OnSearchQueryChange(it))
-            },
-            onImeSearch = {
-                keyboardController?.hide()
-            },
-            modifier = Modifier
-                .widthIn(max = 400.dp)
-                .fillMaxWidth()
-                .padding(16.dp)
-        )
 
         Surface(
             modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth(),
+                .fillMaxSize()
+                .graphicsLayer {
+                    // Start below the search bar. 
+                    // Search bar total height is roughly 56 (bar) + 32 (vertical padding) = 88.dp
+                    translationY = headerOffsetHeightPx + maxHeaderHeightPx + with(density) { 88.dp.toPx() }
+                },
             color = MaterialTheme.colorScheme.surface,
             shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
         ) {
