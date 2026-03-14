@@ -121,7 +121,7 @@ fun BookListScreen(
                     contentDescription = "Offipedia Logo",
                     modifier = Modifier
                         .fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.FillWidth
                 )
             }
 
