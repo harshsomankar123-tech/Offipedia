@@ -3,54 +3,72 @@ package com.plcoding.bookpedia.book.data.mappers
 import com.plcoding.bookpedia.book.data.database.BookEntity
 import com.plcoding.bookpedia.book.data.network.SearchedBookDto
 import com.plcoding.bookpedia.book.domain.Book
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 class BookMappersTest {
 
     @Test
-    fun testSearchedBookDtoToBook() {
+    fun testSearchedBookDtoToBookWithCoverEditionKey() {
         val dto = SearchedBookDto(
-            key = "/works/OL12345W",
-            title = "Kotlin Multiplatform",
+            key = "/works/OL123W",
+            title = "Kotlin",
+            author_name = listOf("Author"),
+            author_key = listOf("A1"),
+            first_publish_year = 2021,
+            ratings_average = 4.0,
+            ratings_count = 10,
+            number_of_pages_median = 100,
+            edition_count = 1,
             language = listOf("en"),
-            author_name = listOf("Philipp Lackner"),
-            cover_edition_key = "OL12345M",
-            first_publish_year = 2024,
-            ratings_average = 4.5,
-            ratings_count = 100,
-            number_of_pages_median = 300,
-            edition_count = 5
+            cover_i = 1,
+            cover_edition_key = "COVER1"
         )
 
         val book = dto.toBook()
 
-        assertEquals("OL12345W", book.id)
-        assertEquals(dto.title, book.title)
-        assertEquals("https://covers.openlibrary.org/b/olid/OL12345M-L.jpg", book.imageUrl)
-        assertEquals(dto.author_name, book.authors)
-        assertEquals(dto.language, book.languages)
-        assertEquals("2024", book.firstPublishYear)
-        assertEquals(dto.ratings_average, book.averageRating)
-        assertEquals(dto.ratings_count, book.ratingCount)
-        assertEquals(dto.number_of_pages_median, book.numPages)
-        assertEquals(dto.edition_count, book.numEditions)
+        assertEquals("OL123W", book.id)
+        assertEquals("Kotlin", book.title)
+        assertEquals("https://covers.openlibrary.org/b/olid/COVER1-L.jpg", book.imageUrl)
+        assertEquals("COVER1", book.coverEditionKey)
+    }
+
+    @Test
+    fun testSearchedBookDtoToBookWithCoverI() {
+        val dto = SearchedBookDto(
+            key = "/works/OL123W",
+            title = "Kotlin",
+            author_name = listOf("Author"),
+            author_key = listOf("A1"),
+            first_publish_year = 2021,
+            ratings_average = 4.0,
+            ratings_count = 10,
+            number_of_pages_median = 100,
+            edition_count = 1,
+            language = listOf("en"),
+            cover_i = 123,
+            cover_edition_key = null
+        )
+
+        val book = dto.toBook()
+
+        assertEquals("https://covers.openlibrary.org/b/id/123-L.jpg", book.imageUrl)
+        assertNull(book.coverEditionKey)
     }
 
     @Test
     fun testBookToBookEntity() {
         val book = Book(
-            id = "123",
-            title = "Test Book",
-            description = "Description",
+            id = "1",
+            title = "Title",
+            description = "Desc",
             imageUrl = "url",
-            languages = listOf("en"),
-            authors = listOf("Author"),
-            firstPublishYear = "2024",
-            averageRating = 4.0,
-            ratingCount = 50,
+            authors = listOf("A"),
+            languages = listOf("L"),
+            firstPublishYear = "2021",
+            averageRating = 4.5,
+            ratingCount = 100,
             numPages = 200,
-            numEditions = 2,
+            numEditions = 5,
             coverEditionKey = "key"
         )
 
@@ -60,8 +78,8 @@ class BookMappersTest {
         assertEquals(book.title, entity.title)
         assertEquals(book.description, entity.description)
         assertEquals(book.imageUrl, entity.imageUrl)
-        assertEquals(book.languages, entity.languages)
         assertEquals(book.authors, entity.authors)
+        assertEquals(book.languages, entity.languages)
         assertEquals(book.firstPublishYear, entity.firstPublishYear)
         assertEquals(book.averageRating, entity.ratingsAverage)
         assertEquals(book.ratingCount, entity.ratingsCount)
@@ -73,17 +91,17 @@ class BookMappersTest {
     @Test
     fun testBookEntityToBook() {
         val entity = BookEntity(
-            id = "123",
-            title = "Test Book",
-            description = "Description",
+            id = "1",
+            title = "Title",
+            description = "Desc",
             imageUrl = "url",
-            languages = listOf("en"),
-            authors = listOf("Author"),
-            firstPublishYear = "2024",
-            ratingsAverage = 4.0,
-            ratingsCount = 50,
+            authors = listOf("A"),
+            languages = listOf("L"),
+            firstPublishYear = "2021",
+            ratingsAverage = 4.5,
+            ratingsCount = 100,
             numPages = 200,
-            numEditions = 2,
+            numEditions = 5,
             coverEditionKey = "key"
         )
 
@@ -93,8 +111,8 @@ class BookMappersTest {
         assertEquals(entity.title, book.title)
         assertEquals(entity.description, book.description)
         assertEquals(entity.imageUrl, book.imageUrl)
-        assertEquals(entity.languages, book.languages)
         assertEquals(entity.authors, book.authors)
+        assertEquals(entity.languages, book.languages)
         assertEquals(entity.firstPublishYear, book.firstPublishYear)
         assertEquals(entity.ratingsAverage, book.averageRating)
         assertEquals(entity.ratingsCount, book.ratingCount)

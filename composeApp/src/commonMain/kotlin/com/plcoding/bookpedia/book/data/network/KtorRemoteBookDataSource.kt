@@ -13,10 +13,10 @@ import kotlinx.serialization.SerializationException
 
 private const val BASE_URL = "https://openlibrary.org"
 
-class KtorRemoteBookDataSource(
+open class KtorRemoteBookDataSource(
     private val httpClient: HttpClient
 ) {
-    suspend fun searchBooks(
+    open suspend fun searchBooks(
         query: String,
         resultLimit: Int? = null
     ): Result<SearchResponseDto, DataError.Remote> {
@@ -52,7 +52,7 @@ class KtorRemoteBookDataSource(
         }
     }
 
-    suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
+    open suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
         return try {
             val response = httpClient.get(
                 urlString = "$BASE_URL/works/$bookWorkId.json"

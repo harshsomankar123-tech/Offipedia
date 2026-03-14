@@ -176,21 +176,28 @@ kover {
                     "*PreviewKt*",
                     "*.di.*",
                     "*.app.Route*",
-                    "com.plcoding.bookpedia.MainKt"
+                    "com.plcoding.bookpedia.MainKt",
+                    "offipedia.composeapp.generated.*",
+                    "com.plcoding.bookpedia.core.presentation.*",
+                    "com.plcoding.bookpedia.book.presentation.*.components.*",
+                    "*_Impl*",
+                    "*_Impl$*",
+                    "*Action*",
+                    "*Event*",
+                    "*State",
+                    "*Route",
+                    "*Dto",
+                    "*Dto$*"
+                )
+                packages(
+                    "com.plcoding.bookpedia.di",
+                    "com.plcoding.bookpedia.core.data",
+                    "com.plcoding.bookpedia.core.presentation",
+                    "com.plcoding.bookpedia.app",
+                    "offipedia.composeapp.generated",
+                    "com.plcoding.bookpedia.core.domain"
                 )
                 annotatedBy("androidx.compose.runtime.Composable")
-            }
-        }
-    }
-}
-
-kover {
-    reports {
-        filters {
-            excludes {
-                classes(
-                    "offipedia.composeapp.generated.*"
-                )
             }
         }
     }

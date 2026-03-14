@@ -3,53 +3,66 @@
 The 'ksp' configuration is deprecated in Kotlin Multiplatform projects. Please use target-specific configurations like 'kspJvm' instead.
 
 > Task :composeApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :composeApp:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidMain NO-SOURCE
 > Task :composeApp:convertXmlValueResourcesForCommonMain UP-TO-DATE
 > Task :composeApp:copyNonXmlValueResourcesForCommonMain UP-TO-DATE
 > Task :composeApp:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
 > Task :composeApp:generateResourceAccessorsForCommonMain UP-TO-DATE
-> Task :composeApp:convertXmlValueResourcesForDesktopMain NO-SOURCE
-> Task :composeApp:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
-> Task :composeApp:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
-> Task :composeApp:generateResourceAccessorsForDesktopMain NO-SOURCE
-> Task :composeApp:generateActualResourceCollectorsForDesktopMain UP-TO-DATE
+> Task :composeApp:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
 > Task :composeApp:generateComposeResClass UP-TO-DATE
 > Task :composeApp:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
-> Task :composeApp:kspKotlinDesktop UP-TO-DATE
-> Task :composeApp:compileKotlinDesktop UP-TO-DATE
-> Task :composeApp:assembleDesktopMainResources UP-TO-DATE
-> Task :composeApp:desktopProcessResources UP-TO-DATE
-> Task :composeApp:desktopMainClasses UP-TO-DATE
-> Task :composeApp:desktopJar UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForAndroidDebug NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidDebug NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidDebug NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidDebug NO-SOURCE
+> Task :composeApp:preBuild UP-TO-DATE
+> Task :composeApp:preDebugBuild UP-TO-DATE
+> Task :composeApp:checkDebugAarMetadata UP-TO-DATE
+> Task :composeApp:generateDebugResValues UP-TO-DATE
+> Task :composeApp:mapDebugSourceSetPaths UP-TO-DATE
+> Task :composeApp:generateDebugResources UP-TO-DATE
+> Task :composeApp:mergeDebugResources UP-TO-DATE
+> Task :composeApp:packageDebugResources UP-TO-DATE
+> Task :composeApp:parseDebugLocalResources UP-TO-DATE
+> Task :composeApp:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :composeApp:extractDeepLinksDebug UP-TO-DATE
+> Task :composeApp:processDebugMainManifest UP-TO-DATE
+> Task :composeApp:processDebugManifest UP-TO-DATE
+> Task :composeApp:processDebugManifestForPackage UP-TO-DATE
+> Task :composeApp:processDebugResources UP-TO-DATE
+> Task :composeApp:kspDebugKotlinAndroid UP-TO-DATE
+> Task :composeApp:compileDebugKotlinAndroid UP-TO-DATE
+> Task :composeApp:javaPreCompileDebug UP-TO-DATE
+> Task :composeApp:compileDebugJavaWithJavac NO-SOURCE
+> Task :composeApp:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForAndroidUnitTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidUnitTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidUnitTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidUnitTest NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidUnitTestDebug NO-SOURCE
 > Task :composeApp:convertXmlValueResourcesForCommonTest NO-SOURCE
 > Task :composeApp:copyNonXmlValueResourcesForCommonTest NO-SOURCE
 > Task :composeApp:prepareComposeResourcesTaskForCommonTest NO-SOURCE
 > Task :composeApp:generateResourceAccessorsForCommonTest NO-SOURCE
-> Task :composeApp:convertXmlValueResourcesForDesktopTest NO-SOURCE
-> Task :composeApp:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
-> Task :composeApp:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
-> Task :composeApp:generateResourceAccessorsForDesktopTest NO-SOURCE
-> Task :composeApp:kspTestKotlinDesktop UP-TO-DATE
+> Task :composeApp:preparePaparazziDebugResources UP-TO-DATE
+> Task :composeApp:kspDebugUnitTestKotlinAndroid
 > Task :composeApp:copyRoomSchemas NO-SOURCE
 
-> Task :composeApp:compileTestKotlinDesktop FAILED
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/data/network/KtorRemoteBookDataSourceTest.kt:30:17 Unresolved reference 'handlers'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/data/network/KtorRemoteBookDataSourceTest.kt:30:32 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/data/network/KtorRemoteBookDataSourceTest.kt:31:21 None of the following candidates is applicable:
-fun MockRequestHandleScope.respond(content: String, status: HttpStatusCode = ..., headers: Headers = ...): HttpResponseData
-fun MockRequestHandleScope.respond(content: ByteArray, status: HttpStatusCode = ..., headers: Headers = ...): HttpResponseData
-fun MockRequestHandleScope.respond(content: ByteReadChannel, status: HttpStatusCode = ..., headers: Headers = ...): HttpResponseData
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:15:79 Unresolved reference 'id'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:19:77 Unresolved reference 'id'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:27:90 Unresolved reference 'id'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:31:84 Unresolved reference 'id'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:35:83 Unresolved reference 'id'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:39:83 Unresolved reference 'id'.
-e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/presentation/DataErrorToUiTextTest.kt:43:78 Unresolved reference 'id'.
+> Task :composeApp:compileDebugUnitTestKotlinAndroid FAILED
+e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/data/repository/BookRepositoryImplTest.kt:46:5 'searchBooks' in 'KtorRemoteBookDataSource' is final and cannot be overridden.
+e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/data/repository/BookRepositoryImplTest.kt:50:5 'getBookDetails' in 'KtorRemoteBookDataSource' is final and cannot be overridden.
+e: file:///Users/harshsomankar/Offipedia/composeApp/src/commonTest/kotlin/com/plcoding/bookpedia/book/data/repository/BookRepositoryImplTest.kt:57:32 Unresolved reference 'respond'.
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':composeApp:compileTestKotlinDesktop'.
+Execution failed for task ':composeApp:compileDebugUnitTestKotlinAndroid'.
 > A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
    > Compilation error. See log for more details
 
@@ -66,4 +79,4 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 For more on this, please refer to https://docs.gradle.org/8.9/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
 BUILD FAILED in 1s
-14 actionable tasks: 1 executed, 13 up-to-date
+27 actionable tasks: 2 executed, 25 up-to-date
