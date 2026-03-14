@@ -18,6 +18,8 @@ The project is architected with strict **Clean Architecture** principles and the
 * **Custom Serialization:** Includes a specialized `KSerializer` to handle inconsistent JSON responses (String vs. Object) from the Open Library API.
 
 ---
+##Screen Recording
+
 
 ## 🛠️ Tech Stack
 
@@ -63,6 +65,7 @@ The project's reliability is backed by a robust CI/CD pipeline and a high-qualit
 * **UI Verification:**
   * **Snapshot Testing:** Integrated Paparazzi to catch UI regressions through automated screenshot comparisons.
   * **Instrumentation:** Established a foundation for Compose UI Testing running on real Android emulators in the cloud.
+    
 
 ---
 
