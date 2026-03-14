@@ -27,9 +27,23 @@ import com.plcoding.bookpedia.book.presentation.book_list.BookListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 import com.plcoding.bookpedia.core.presentation.BookpediaTheme
+import coil3.ImageLoader
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.setSingletonImageLoaderFactory
+import coil3.network.ktor3.KtorNetworkFetcherFactory
+import coil3.util.DebugLogger
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun App() {
+    setSingletonImageLoaderFactory { context ->
+        ImageLoader.Builder(context)
+            .components {
+                add(KtorNetworkFetcherFactory())
+            }
+            .logger(DebugLogger())
+            .build()
+    }
     BookpediaTheme {
         val navController = rememberNavController()
         
