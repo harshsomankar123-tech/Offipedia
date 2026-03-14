@@ -7,7 +7,7 @@ import kotlinx.coroutines.IO
 
 @Database(
     entities = [BookEntity::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(StringListTypeConverter::class)
 abstract class FavoriteBookDatabase : RoomDatabase() {

@@ -88,7 +88,9 @@ fun BookListScreen(
     }
 
     LaunchedEffect(state.selectedTabIndex) {
-        pagerState.animateScrollToPage(state.selectedTabIndex)
+        if (state.selectedTabIndex in 0..1) {
+            pagerState.animateScrollToPage(state.selectedTabIndex)
+        }
     }
 
     LaunchedEffect(pagerState.currentPage) {
