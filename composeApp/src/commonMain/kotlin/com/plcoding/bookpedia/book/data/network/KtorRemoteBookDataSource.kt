@@ -29,7 +29,16 @@ class KtorRemoteBookDataSource(
                 parameter("language", "eng")
                 parameter("fields", "key,title,author_name,author_key,first_publish_year,ratings_average,ratings_count,number_of_pages_median,edition_count,language,cover_i,cover_edition_key")
             }
-            Result.Success(response.body())
+            
+            if (response.status.value in 200..299) {
+                Result.Success(response.body())
+            } else if (response.status.value in 400..499) {
+                Result.Error(DataError.Remote.CLIENT_ERROR)
+            } else if (response.status.value in 500..599) {
+                Result.Error(DataError.Remote.SERVER_ERROR)
+            } else {
+                Result.Error(DataError.Remote.UNKNOWN)
+            }
         } catch (e: UnresolvedAddressException) {
             Result.Error(DataError.Remote.SERVICE_UNAVAILABLE)
         } catch (e: SerializationException) {
@@ -48,7 +57,16 @@ class KtorRemoteBookDataSource(
             val response = httpClient.get(
                 urlString = "$BASE_URL/works/$bookWorkId.json"
             )
-            Result.Success(response.body())
+            
+            if (response.status.value in 200..299) {
+                Result.Success(response.body())
+            } else if (response.status.value in 400..499) {
+                Result.Error(DataError.Remote.CLIENT_ERROR)
+            } else if (response.status.value in 500..599) {
+                Result.Error(DataError.Remote.SERVER_ERROR)
+            } else {
+                Result.Error(DataError.Remote.UNKNOWN)
+            }
         } catch (e: UnresolvedAddressException) {
             Result.Error(DataError.Remote.SERVICE_UNAVAILABLE)
         } catch (e: SerializationException) {

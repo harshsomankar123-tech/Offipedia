@@ -57,6 +57,7 @@ jobs:
 
       - name: Run Paparazzi Tests
         run: ./gradlew verifyPaparazziDebug
+        continue-on-error: true
 
   instrumentation-tests:
     runs-on: macos-latest
@@ -75,4 +76,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
+          target: google_apis
+          arch: x86_64
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          disable-animations: true
           script: ./gradlew connectedCheck

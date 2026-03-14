@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.koin.test)
             implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.ktor.client.mock)
         }
         androidUnitTest.dependencies {
             implementation(libs.kotlin.test.junit)
@@ -159,6 +160,38 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.plcoding.bookpedia"
             packageVersion = "1.0.0"
+        }
+    }
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                classes(
+                    "*.ComposableSingletons*",
+                    "*_Composable*",
+                    "*.components.*",
+                    "*ScreenKt*",
+                    "*PreviewKt*",
+                    "*.di.*",
+                    "*.app.Route*",
+                    "com.plcoding.bookpedia.MainKt"
+                )
+                annotatedBy("androidx.compose.runtime.Composable")
+            }
+        }
+    }
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                classes(
+                    "offipedia.composeapp.generated.*"
+                )
+            }
         }
     }
 }
