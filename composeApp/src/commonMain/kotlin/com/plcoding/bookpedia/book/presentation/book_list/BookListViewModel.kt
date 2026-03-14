@@ -47,6 +47,15 @@ class BookListViewModel(
                     it.copy(selectedTabIndex = action.index)
                 }
             }
+            is BookListAction.OnRefresh -> {
+                val query = _state.value.searchQuery
+                searchJob?.cancel()
+                searchJob = if (query.isBlank()) {
+                    searchBooks("trending")
+                } else {
+                    searchBooks(query)
+                }
+            }
         }
     }
 

@@ -7,6 +7,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -213,11 +215,13 @@ fun BookListScreen(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         if (pageIndex == 0) {
-                            if (state.isLoading) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.align(Alignment.Center)
-                                )
-                            } else {
+                            PullToRefreshBox(
+                                isRefreshing = state.isLoading,
+                                onRefresh = {
+                                    onAction(BookListAction.OnRefresh)
+                                },
+                                modifier = Modifier.fillMaxSize()
+                            ) {
                                 BookList(
                                     books = state.searchResults,
                                     onBookClick = {
