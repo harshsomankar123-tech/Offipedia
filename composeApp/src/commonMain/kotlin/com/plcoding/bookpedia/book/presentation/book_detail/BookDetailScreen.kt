@@ -116,6 +116,12 @@ fun BookDetailScreen(
                         .height(300.dp),
                     contentAlignment = Alignment.Center
                 ) {
+                    // Fallback for blurred background (Bottom layer)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+                    )
                     AsyncImage(
                         model = book.imageUrl,
                         contentDescription = null,
@@ -124,12 +130,6 @@ fun BookDetailScreen(
                             .blur(20.dp),
                         contentScale = ContentScale.Crop,
                         onError = { /* Log */ }
-                    )
-                    // Fallback for blurred background
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
                     )
                     Box(
                         modifier = Modifier
@@ -151,6 +151,14 @@ fun BookDetailScreen(
                         imageRotation.animateTo(0f, animationSpec = tween(600))
                     }
 
+                    // Placeholder for main image
+                    Box(
+                        modifier = Modifier
+                            .height(250.dp)
+                            .aspectRatio(0.65f)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.Gray.copy(alpha = 0.2f))
+                    )
                     AsyncImage(
                         model = book.imageUrl,
                         contentDescription = book.title,
@@ -166,14 +174,6 @@ fun BookDetailScreen(
                             },
                         contentScale = ContentScale.Crop,
                         onError = { /* Log */ }
-                    )
-                    // Placeholder for main image
-                    Box(
-                        modifier = Modifier
-                            .height(250.dp)
-                            .aspectRatio(0.65f)
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(Color.Gray.copy(alpha = 0.2f))
                     )
                 }
 

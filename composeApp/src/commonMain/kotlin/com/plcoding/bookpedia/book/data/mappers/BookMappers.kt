@@ -8,10 +8,10 @@ fun SearchedBookDto.toBook(): Book {
     return Book(
         id = key.substringAfterLast("/"),
         title = title,
-        imageUrl = if (cover_edition_key != null) {
-            "https://covers.openlibrary.org/b/olid/${cover_edition_key}-L.jpg"
-        } else {
-            "https://covers.openlibrary.org/b/id/${cover_i}-L.jpg"
+        imageUrl = when {
+            cover_edition_key != null -> "https://covers.openlibrary.org/b/olid/${cover_edition_key}-L.jpg"
+            cover_i != null -> "https://covers.openlibrary.org/b/id/${cover_i}-L.jpg"
+            else -> null
         },
         authors = author_name ?: emptyList(),
         description = null,

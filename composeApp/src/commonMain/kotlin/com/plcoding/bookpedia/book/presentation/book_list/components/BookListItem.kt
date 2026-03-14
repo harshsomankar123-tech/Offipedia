@@ -49,6 +49,12 @@ fun BookListItem(
                     .aspectRatio(0.65f),
                 contentAlignment = Alignment.Center
             ) {
+                // Add a simple colored background as placeholder (back layer)
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.LightGray.copy(alpha = 0.2f))
+                )
                 AsyncImage(
                     model = book.imageUrl,
                     contentDescription = book.title,
@@ -57,12 +63,6 @@ fun BookListItem(
                     onLoading = { /* No-op, shown via background pulse or progress */ },
                     onSuccess = { /* No-op */ },
                     onError = { /* Log if needed */ }
-                )
-                // Add a simple colored background as placeholder
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.LightGray.copy(alpha = 0.2f))
                 )
             }
             Column(
