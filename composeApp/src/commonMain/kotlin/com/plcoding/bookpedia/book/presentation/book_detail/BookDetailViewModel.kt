@@ -14,7 +14,11 @@ class BookDetailViewModel(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val bookId = savedStateHandle.toRoute<Route.BookDetail>().id
+    private val bookId = try {
+        savedStateHandle.toRoute<Route.BookDetail>().id
+    } catch (e: Exception) {
+        savedStateHandle.get<String>("id") ?: ""
+    }
 
     private val _state = MutableStateFlow(BookDetailState())
     val state = _state
