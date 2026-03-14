@@ -77,23 +77,15 @@ fun BookListScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    brush = androidx.compose.ui.graphics.Brush.verticalGradient(
-                        colors = listOf(
-                            MaterialTheme.colorScheme.primary,
-                            MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
-                        )
-                    )
-                )
-                .padding(vertical = 32.dp),
+                .height(180.dp),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(Res.drawable.logo_offipedia),
                 contentDescription = "Offipedia Logo",
                 modifier = Modifier
-                    .size(200.dp),
-                contentScale = ContentScale.Fit
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
