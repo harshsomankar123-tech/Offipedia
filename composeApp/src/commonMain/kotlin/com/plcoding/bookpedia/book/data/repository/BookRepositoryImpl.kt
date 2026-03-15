@@ -3,7 +3,7 @@ package com.plcoding.bookpedia.book.data.repository
 import com.plcoding.bookpedia.book.data.database.BookDao
 import com.plcoding.bookpedia.book.data.mappers.toBook
 import com.plcoding.bookpedia.book.data.mappers.toBookEntity
-import com.plcoding.bookpedia.book.data.network.KtorRemoteBookDataSource
+import com.plcoding.bookpedia.book.data.network.BookRemoteDataSource
 import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.core.domain.DataError
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class BookRepositoryImpl(
-    private val remoteBookDataSource: KtorRemoteBookDataSource,
+    private val remoteBookDataSource: BookRemoteDataSource,
     private val favoriteBookDao: BookDao
 ) : BookRepository {
     override suspend fun searchBooks(query: String): Result<List<Book>, DataError.Remote> {

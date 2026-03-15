@@ -13,12 +13,12 @@ import kotlinx.serialization.SerializationException
 
 private const val BASE_URL = "https://openlibrary.org"
 
-open class KtorRemoteBookDataSource(
+class KtorRemoteBookDataSource(
     private val httpClient: HttpClient
-) {
-    open suspend fun searchBooks(
+): BookRemoteDataSource {
+    override suspend fun searchBooks(
         query: String,
-        resultLimit: Int? = null
+        resultLimit: Int?
     ): Result<SearchResponseDto, DataError.Remote> {
         return try {
             val response = httpClient.get(
@@ -52,7 +52,7 @@ open class KtorRemoteBookDataSource(
         }
     }
 
-    open suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
+    override suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
         return try {
             val response = httpClient.get(
                 urlString = "$BASE_URL/works/$bookWorkId.json"

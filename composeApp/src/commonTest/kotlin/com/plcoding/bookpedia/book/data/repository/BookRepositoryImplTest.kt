@@ -2,8 +2,8 @@ package com.plcoding.bookpedia.book.data.repository
 
 import com.plcoding.bookpedia.book.data.database.BookDao
 import com.plcoding.bookpedia.book.data.database.BookEntity
+import com.plcoding.bookpedia.book.data.network.BookRemoteDataSource
 import com.plcoding.bookpedia.book.data.network.BookWorkDto
-import com.plcoding.bookpedia.book.data.network.KtorRemoteBookDataSource
 import com.plcoding.bookpedia.book.data.network.SearchResponseDto
 import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.core.domain.DataError
@@ -11,8 +11,6 @@ import com.plcoding.bookpedia.core.domain.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpStatusCode
@@ -43,7 +41,7 @@ class FakeBookDao : BookDao {
     }
 }
 
-class FakeRemoteBookDataSource : KtorRemoteBookDataSource(mockkHttpClient()) {
+class FakeRemoteBookDataSource : BookRemoteDataSource {
     var searchResult: Result<SearchResponseDto, DataError.Remote> = Result.Error(DataError.Remote.UNKNOWN)
     var detailsResult: Result<BookWorkDto, DataError.Remote> = Result.Error(DataError.Remote.UNKNOWN)
 
@@ -55,11 +53,6 @@ class FakeRemoteBookDataSource : KtorRemoteBookDataSource(mockkHttpClient()) {
         return detailsResult
     }
 }
-
-// Helper to satisfy constructor
-private fun mockkHttpClient() = io.ktor.client.HttpClient(io.ktor.client.engine.mock.MockEngine { 
-    respond("") 
-})
 
 class BookRepositoryImplTest {
 
