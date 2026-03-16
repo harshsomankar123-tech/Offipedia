@@ -13,20 +13,12 @@ import kotlinx.serialization.SerializationException
 
 private const val BASE_URL = "https://openlibrary.org"
 
-class KtorRemoteBookDataSource(
+open class KtorRemoteBookDataSource(
     private val httpClient: HttpClient
-): BookRemoteDataSource {
-    /**
-     * Searches Open Library for books matching the given query and returns the parsed search response or a mapped remote error.
-     *
-     * @param query The search query string sent to the remote API.
-     * @param resultLimit Optional maximum number of results to return.
-     * @return `Result.Success` containing a `SearchResponseDto` when the request succeeds; `Result.Error` containing a `DataError.Remote`
-     *         variant when the request fails (client error, server error, serialization error, service unavailable, or unknown error).
-     */
-    override suspend fun searchBooks(
+) {
+    open suspend fun searchBooks(
         query: String,
-        resultLimit: Int?
+        resultLimit: Int? = null
     ): Result<SearchResponseDto, DataError.Remote> {
         return try {
             val response = httpClient.get(
@@ -60,14 +52,7 @@ class KtorRemoteBookDataSource(
         }
     }
 
-    /**
-     * Fetches detailed metadata for a book work from Open Library by work ID.
-     *
-     * @param bookWorkId The Open Library work identifier (the `{work_id}` used in the `/works/{work_id}.json` endpoint).
-     * @return `Result.Success` containing a `BookWorkDto` when the request succeeds; `Result.Error` with a `DataError.Remote`
-     *         value describing the failure otherwise.
-     */
-    override suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
+    open suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
         return try {
             val response = httpClient.get(
                 urlString = "$BASE_URL/works/$bookWorkId.json"
