@@ -3,7 +3,7 @@ package com.plcoding.bookpedia.book.data.repository
 import com.plcoding.bookpedia.book.data.database.BookDao
 import com.plcoding.bookpedia.book.data.mappers.toBook
 import com.plcoding.bookpedia.book.data.mappers.toBookEntity
-import com.plcoding.bookpedia.book.data.network.KtorRemoteBookDataSource
+import com.plcoding.bookpedia.book.data.network.BookRemoteDataSource
 import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.core.domain.DataError
@@ -13,9 +13,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class BookRepositoryImpl(
-    private val remoteBookDataSource: KtorRemoteBookDataSource,
+    private val remoteBookDataSource: BookRemoteDataSource,
     private val favoriteBookDao: BookDao
 ) : BookRepository {
+    /**
+     * Searches the remote data source for books matching the given query and returns them as domain `Book` models.
+     *
+     * @param query The search string used to find matching books.
+     * @return `Result.Success` containing a list of `Book` objects mapped from the remote response documents, or `Result.Error` with a `DataError.Remote` if the remote request fails.
+     */
     override suspend fun searchBooks(query: String): Result<List<Book>, DataError.Remote> {
         return remoteBookDataSource
             .searchBooks(query)
