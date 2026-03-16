@@ -1,4 +1,4 @@
-# Offipedia 📚
+# Offipedia 
 
 [![codecov](https://codecov.io/gh/harshsomankar123-tech/Offipedia/graph/badge.svg)](https://codecov.io/gh/harshsomankar123-tech/Offipedia)
 
@@ -8,7 +8,7 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
-## ✨ Technical Highlights
+## Technical Highlights
 
 * **Unified Codebase:** 100% Kotlin code sharing for UI, business logic, and data layers.
 * **Offline-First Strategy:** Local persistence using **Room KMP** with custom type converters for complex data structures.
@@ -18,8 +18,10 @@ The project is architected with strict **Clean Architecture** principles and the
 * **Custom Serialization:** Includes a specialized `KSerializer` to handle inconsistent JSON responses (String vs. Object) from the Open Library API.
 
 ---
+##Screen Recording
 
-## 🛠️ Tech Stack
+
+## Tech Stack
 
 | Component | Technology |
 | :--- | :--- |
@@ -32,7 +34,7 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The project is structured into three distinct layers to maintain a strict separation of concerns:
 
@@ -42,7 +44,7 @@ The project is structured into three distinct layers to maintain a strict separa
 
 ---
 
-## 🚀 CI/CD & Testing Infrastructure
+## CI/CD & Testing Infrastructure
 
 The project's reliability is backed by a robust CI/CD pipeline and a high-quality test suite designed to catch regressions and maintain code health.
 
@@ -63,10 +65,11 @@ The project's reliability is backed by a robust CI/CD pipeline and a high-qualit
 * **UI Verification:**
   * **Snapshot Testing:** Integrated Paparazzi to catch UI regressions through automated screenshot comparisons.
   * **Instrumentation:** Established a foundation for Compose UI Testing running on real Android emulators in the cloud.
+    
 
 ---
 
-## 💻 Development Setup
+## Development Setup
 
 ### Prerequisites
 * **Android Studio:** Ladybug or later.
