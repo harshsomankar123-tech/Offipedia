@@ -68,6 +68,13 @@ The project's reliability is backed by a robust CI/CD pipeline and a high-qualit
     
 
 ---
+<img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/3f97fdaa-cadc-488b-a684-b537ad08dee1" />
+
+
+https://github.com/user-attachments/assets/58915edf-9d77-4d90-92a4-2a47ee178ff2
+
+
+
 
 ## Development Setup
 
