@@ -8,6 +8,7 @@ import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.book.domain.BookTutorRepository
 import com.plcoding.bookpedia.core.domain.onSuccess
+import com.plcoding.bookpedia.core.domain.onError
 import com.plcoding.bookpedia.core.domain.getOrNull
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -62,16 +63,17 @@ class BookDetailViewModel(
         viewModelScope.launch {
             bookRepository
                 .getBookDescription(bookId)
-                .onSuccess { description ->
-                    _state.update {
-                        it.copy(
-                            book = it.book?.copy(description = description),
-                            isLoading = false
-                        )
-                    }
+                .onSuccess { summary ->
+                    _state.update { it.copy(
+                        isLoading = false,
+                        book = it.book?.copy(description = summary)
+                    ) }
                     _state.value.book?.let { book ->
                         fetchAiTutorInfo(book)
                     }
+                }
+                .onError {
+                    _state.update { it.copy(isLoading = false) }
                 }
         }
     }

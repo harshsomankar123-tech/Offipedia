@@ -2,6 +2,7 @@ package com.plcoding.bookpedia.core.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -16,6 +17,11 @@ object HttpClientFactory {
                     ignoreUnknownKeys = true
                     coerceInputValues = true
                 })
+            }
+            install(HttpTimeout) {
+                requestTimeoutMillis = 30000
+                connectTimeoutMillis = 10000
+                socketTimeoutMillis = 30000
             }
             install(Logging) {
                 level = LogLevel.ALL
