@@ -25,6 +25,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.plcoding.bookpedia.book.domain.Book
@@ -222,18 +225,62 @@ fun BookListScreen(
                                 },
                                 modifier = Modifier.fillMaxSize()
                             ) {
-                                BookList(
-                                    books = state.searchResults,
-                                    onBookClick = {
-                                        onAction(BookListAction.OnBookClick(it))
-                                    },
-                                    modifier = Modifier.fillMaxSize(),
-                                    emptyMessage = if (state.errorMessage != null) {
-                                        state.errorMessage.asString()
-                                    } else {
-                                        "No search results found"
+                                Column {
+                                    if (state.isAiLoading || state.aiSummary != null) {
+                                        Card(
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(16.dp),
+                                            colors = CardDefaults.cardColors(
+                                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                                            ),
+                                            shape = RoundedCornerShape(16.dp)
+                                        ) {
+                                            Column(modifier = Modifier.padding(16.dp)) {
+                                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                                    Icon(
+                                                        imageVector = Icons.Default.Info,
+                                                        contentDescription = null,
+                                                        tint = MaterialTheme.colorScheme.primary
+                                                    )
+                                                    Spacer(modifier = Modifier.width(8.dp))
+                                                    Text(
+                                                        text = "AI Tutor Summary",
+                                                        style = MaterialTheme.typography.titleSmall,
+                                                        fontWeight = FontWeight.Bold,
+                                                        color = MaterialTheme.colorScheme.primary
+                                                    )
+                                                }
+                                                Spacer(modifier = Modifier.height(8.dp))
+                                                if (state.isAiLoading) {
+                                                    LinearProgressIndicator(
+                                                        modifier = Modifier.fillMaxWidth(),
+                                                        color = MaterialTheme.colorScheme.primary
+                                                    )
+                                                } else {
+                                                    state.aiSummary?.let { summary ->
+                                                        Text(
+                                                            text = summary,
+                                                            style = MaterialTheme.typography.bodyMedium
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
-                                )
+                                    BookList(
+                                        books = state.searchResults,
+                                        onBookClick = {
+                                            onAction(BookListAction.OnBookClick(it))
+                                        },
+                                        modifier = Modifier.fillMaxSize(),
+                                        emptyMessage = if (state.errorMessage != null) {
+                                            state.errorMessage.asString()
+                                        } else {
+                                            "No search results found"
+                                        }
+                                    )
+                                }
                             }
                         } else {
                             BookList(

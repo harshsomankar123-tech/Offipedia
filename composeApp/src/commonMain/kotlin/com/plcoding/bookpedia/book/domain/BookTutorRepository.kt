@@ -8,11 +8,21 @@ import com.plcoding.bookpedia.core.domain.map
 interface BookTutorRepository {
     suspend fun getBookSummary(book: Book): Result<String, DataError.Remote>
     suspend fun getRecommendations(book: Book): Result<List<String>, DataError.Remote>
+    suspend fun getSearchSummary(query: String, books: List<Book>): Result<String, DataError.Remote>
 }
 
 class BookTutorRepositoryImpl(
     private val geminiClient: GeminiClient
 ) : BookTutorRepository {
+
+    override suspend fun getSearchSummary(query: String, books: List<Book>): Result<String, DataError.Remote> {
+        val titles = books.take(5).joinToString(", ") { it.title }
+        val prompt = """
+            The user searched for "$query" and found these books: $titles. 
+            Provide a very brief (1-2 sentences) summary of what these books are generally about and what the user might find interesting.
+        """.trimIndent()
+        return geminiClient.generateContent(prompt)
+    }
 
     override suspend fun getBookSummary(book: Book): Result<String, DataError.Remote> {
         val prompt = """

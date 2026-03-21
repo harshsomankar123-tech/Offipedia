@@ -2,7 +2,9 @@ package com.plcoding.bookpedia.book.presentation.book_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
+import com.plcoding.bookpedia.book.domain.BookTutorRepository
 import com.plcoding.bookpedia.book.presentation.toUiText
 import com.plcoding.bookpedia.core.domain.onError
 import com.plcoding.bookpedia.core.domain.onSuccess
@@ -12,7 +14,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class BookListViewModel(
-    private val bookRepository: BookRepository
+    private val bookRepository: BookRepository,
+    private val bookTutorRepository: BookTutorRepository
 ) : ViewModel() {
 
     private var searchJob: Job? = null
@@ -96,6 +99,9 @@ class BookListViewModel(
                         searchResults = results
                     )
                 }
+                if (results.isNotEmpty() && query != "trending") {
+                    generateAiSummary(query, results)
+                }
             }
             .onError { error ->
                 _state.update {
@@ -106,6 +112,24 @@ class BookListViewModel(
                     )
                 }
             }
+    }
+
+    private fun generateAiSummary(query: String, books: List<Book>) {
+        viewModelScope.launch {
+            _state.update { it.copy(isAiLoading = true) }
+            bookTutorRepository.getSearchSummary(query, books)
+                .onSuccess { summary ->
+                    _state.update { 
+                        it.copy(
+                            aiSummary = summary,
+                            isAiLoading = false
+                        )
+                    }
+                }
+                .onError {
+                    _state.update { it.copy(isAiLoading = false) }
+                }
+        }
     }
 
     private fun observeFavoriteBooks() {

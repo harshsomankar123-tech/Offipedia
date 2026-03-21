@@ -15,6 +15,7 @@ import kotlin.test.*
 class FakeBookTutorRepository : BookTutorRepository {
     override suspend fun getBookSummary(book: Book): Result<String, DataError.Remote> = Result.Success("Fake Summary")
     override suspend fun getRecommendations(book: Book): Result<List<String>, DataError.Remote> = Result.Success(listOf("Rec 1", "Rec 2"))
+    override suspend fun getSearchSummary(query: String, books: List<Book>): Result<String, DataError.Remote> = Result.Success("Search summary")
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
