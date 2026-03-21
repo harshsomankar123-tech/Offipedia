@@ -18,7 +18,8 @@ fun BookList(
     books: List<Book>,
     onBookClick: (Book) -> Unit,
     modifier: Modifier = Modifier,
-    emptyMessage: String = "No books found"
+    emptyMessage: String = "No books found",
+    header: @Composable () -> Unit = {}
 ) {
     val listState = rememberLazyListState()
 
@@ -40,6 +41,9 @@ fun BookList(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(16.dp)
         ) {
+            item {
+                header()
+            }
             items(
                 items = books,
                 key = { it.id }

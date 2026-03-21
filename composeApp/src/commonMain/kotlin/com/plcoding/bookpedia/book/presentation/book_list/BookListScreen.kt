@@ -225,64 +225,62 @@ fun BookListScreen(
                                 },
                                 modifier = Modifier.fillMaxSize()
                             ) {
-                                Column {
-                                    if (state.isAiLoading || state.aiSummary != null) {
-                                        Card(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(16.dp),
-                                            colors = CardDefaults.cardColors(
-                                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                                            ),
-                                            shape = RoundedCornerShape(16.dp)
-                                        ) {
-                                            Column(modifier = Modifier.padding(16.dp)) {
-                                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                                    Icon(
-                                                        imageVector = Icons.Default.Info,
-                                                        contentDescription = null,
-                                                        tint = MaterialTheme.colorScheme.primary
-                                                    )
-                                                    Spacer(modifier = Modifier.width(8.dp))
-                                                    Text(
-                                                        text = "AI Tutor Summary",
-                                                        style = MaterialTheme.typography.titleSmall,
-                                                        fontWeight = FontWeight.Bold,
-                                                        color = MaterialTheme.colorScheme.primary
-                                                    )
-                                                }
-                                                Spacer(modifier = Modifier.height(8.dp))
-                                                if (state.isAiLoading) {
-                                                    LinearProgressIndicator(
-                                                        modifier = Modifier.fillMaxWidth(),
-                                                        color = MaterialTheme.colorScheme.primary
-                                                    )
-                                                } else {
-                                                    state.aiSummary?.let { summary ->
-                                                        Text(
-                                                            text = summary,
-                                                            style = MaterialTheme.typography.bodyMedium
+                                BookList(
+                                    books = state.searchResults,
+                                    onBookClick = {
+                                        onAction(BookListAction.OnBookClick(it))
+                                    },
+                                    modifier = Modifier.fillMaxSize(),
+                                    emptyMessage = if (state.errorMessage != null) {
+                                        state.errorMessage.asString()
+                                    } else {
+                                        "No search results found"
+                                    },
+                                    header = {
+                                        if (state.isAiLoading || state.aiSummary != null) {
+                                            Card(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(bottom = 16.dp),
+                                                colors = CardDefaults.cardColors(
+                                                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                                                ),
+                                                shape = RoundedCornerShape(16.dp)
+                                            ) {
+                                                Column(modifier = Modifier.padding(16.dp)) {
+                                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                                        Icon(
+                                                            imageVector = Icons.Default.Info,
+                                                            contentDescription = null,
+                                                            tint = MaterialTheme.colorScheme.primary
                                                         )
+                                                        Spacer(modifier = Modifier.width(8.dp))
+                                                        Text(
+                                                            text = "AI Tutor Summary",
+                                                            style = MaterialTheme.typography.titleSmall,
+                                                            fontWeight = FontWeight.Bold,
+                                                            color = MaterialTheme.colorScheme.primary
+                                                        )
+                                                    }
+                                                    Spacer(modifier = Modifier.height(8.dp))
+                                                    if (state.isAiLoading) {
+                                                        LinearProgressIndicator(
+                                                            modifier = Modifier.fillMaxWidth(),
+                                                            color = MaterialTheme.colorScheme.primary
+                                                        )
+                                                    } else {
+                                                        state.aiSummary?.let { summary ->
+                                                            Text(
+                                                                text = summary,
+                                                                style = MaterialTheme.typography.bodyMedium
+                                                            )
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                    BookList(
-                                        books = state.searchResults,
-                                        onBookClick = {
-                                            onAction(BookListAction.OnBookClick(it))
-                                        },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .weight(1f),
-                                        emptyMessage = if (state.errorMessage != null) {
-                                            state.errorMessage.asString()
-                                        } else {
-                                            "No search results found"
-                                        }
-                                    )
-                                }
+                                )
                             }
                         } else {
                             BookList(
