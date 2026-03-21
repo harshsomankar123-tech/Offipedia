@@ -41,10 +41,10 @@ https://github.com/user-attachments/assets/093c369a-2ff6-473e-89e8-722ef88ce84a
 
 https://github.com/user-attachments/assets/dc1992bc-38df-4d9b-ba85-2872caa6ec62
 
-g width="355" height="765" alt="Screenshot 2026-03-22 at 00 18 38" src="https://github.com/user-attachments/assets/83cfa82d-db4f-4153-a5d0-59fc6f626c05" />
+<img width="355" height="765" alt="Screenshot 2026-03-22 at 00 18 38" src="https://github.com/user-attachments/assets/83cfa82d-db4f-4153-a5d0-59fc6f626c05" />
 
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Technology |
 | :--- | :--- |
@@ -59,7 +59,7 @@ g width="355" height="765" alt="Screenshot 2026-03-22 at 00 18 38" src="https://
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The project is structured into three distinct layers to maintain a strict separation of concerns:
 
@@ -69,7 +69,7 @@ The project is structured into three distinct layers to maintain a strict separa
 
 ---
 
-## 🚀 CI/CD & Testing Infrastructure
+## CI/CD & Testing Infrastructure
 
 The project's reliability is backed by a robust CI/CD pipeline and a high-quality test suite designed to catch regressions and maintain code health.
 
@@ -93,7 +93,7 @@ The project's reliability is backed by a robust CI/CD pipeline and a high-qualit
 
 ---
 
-## 💻 Development Setup
+##  Development Setup
 
 ### Prerequisites
 * **Android Studio:** Ladybug or later.
@@ -127,7 +127,7 @@ Linting: ```bash
 **Snapshot Verification:** ```bash
 ./gradlew verifyPaparazziDebug
 
-👨‍💻 Author
+Author
 Harsh Somankar
 
 GitHub: @harshsomankar123-tech
