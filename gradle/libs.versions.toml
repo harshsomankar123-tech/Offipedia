@@ -91,3 +91,4 @@ ksp = { id = "com.google.devtools.ksp", version = "2.0.21-1.0.25" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.4.0" }

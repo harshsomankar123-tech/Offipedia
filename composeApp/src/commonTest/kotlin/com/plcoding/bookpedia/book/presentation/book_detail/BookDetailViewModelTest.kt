@@ -2,7 +2,9 @@ package com.plcoding.bookpedia.book.presentation.book_detail
 
 import androidx.lifecycle.SavedStateHandle
 import com.plcoding.bookpedia.book.domain.Book
+import com.plcoding.bookpedia.book.domain.BookTutorRepository
 import com.plcoding.bookpedia.book.presentation.book_list.FakeBookRepository
+import com.plcoding.bookpedia.core.domain.DataError
 import com.plcoding.bookpedia.core.domain.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,26 +12,28 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
 import kotlin.test.*
 
+class FakeBookTutorRepository : BookTutorRepository {
+    override suspend fun getBookSummary(book: Book): Result<String, DataError.Remote> = Result.Success("Fake Summary")
+    override suspend fun getRecommendations(book: Book): Result<List<String>, DataError.Remote> = Result.Success(listOf("Rec 1", "Rec 2"))
+}
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class BookDetailViewModelTest {
 
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var repository: FakeBookRepository
+    private lateinit var tutorRepository: FakeBookTutorRepository
     private val testDispatcher = StandardTestDispatcher()
 
     @BeforeTest
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         repository = FakeBookRepository()
+        tutorRepository = FakeBookTutorRepository()
         
-        // Mock SavedStateHandle with Route.BookDetail
-        // Note: SavedStateHandle.toRoute is an extension from Navigation
-        // For simplicity in unit test, we can pass the ID directly if the implementation allows,
-        // but here it calls toRoute.
-        // We can use the constructor that takes a map if available or just mock it.
         val savedStateHandle = SavedStateHandle(mapOf("id" to "123"))
         
-        viewModel = BookDetailViewModel(repository, savedStateHandle)
+        viewModel = BookDetailViewModel(repository, tutorRepository, savedStateHandle)
     }
 
     @AfterTest

@@ -4,13 +4,17 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
+import com.plcoding.bookpedia.book.domain.BookTutorRepository
 import com.plcoding.bookpedia.core.domain.onSuccess
+import com.plcoding.bookpedia.core.domain.getOrNull
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class BookDetailViewModel(
     private val bookRepository: BookRepository,
+    private val bookTutorRepository: BookTutorRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -65,7 +69,27 @@ class BookDetailViewModel(
                             isLoading = false
                         )
                     }
+                    _state.value.book?.let { book ->
+                        fetchAiTutorInfo(book)
+                    }
                 }
+        }
+    }
+
+    private fun fetchAiTutorInfo(book: Book) {
+        viewModelScope.launch {
+            _state.update { it.copy(isAiLoading = true) }
+            
+            val summaryResult = bookTutorRepository.getBookSummary(book)
+            val recommendationsResult = bookTutorRepository.getRecommendations(book)
+            
+            _state.update { state ->
+                state.copy(
+                    aiTutorSummary = summaryResult.onSuccess { it }.getOrNull(),
+                    aiRecommendations = recommendationsResult.onSuccess { it }.getOrNull() ?: emptyList(),
+                    isAiLoading = false
+                )
+            }
         }
     }
 

@@ -10,6 +10,9 @@ import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.book.presentation.book_detail.BookDetailViewModel
 import com.plcoding.bookpedia.book.presentation.book_list.BookListViewModel
 import com.plcoding.bookpedia.book.presentation.SelectedBookViewModel
+import com.plcoding.bookpedia.book.data.network.GeminiClient
+import com.plcoding.bookpedia.book.domain.BookTutorRepository
+import com.plcoding.bookpedia.book.domain.BookTutorRepositoryImpl
 import com.plcoding.bookpedia.core.data.HttpClientFactory
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -23,6 +26,8 @@ val sharedModule = module {
     single { HttpClientFactory.create(get()) }
     singleOf(::KtorRemoteBookDataSource).bind<BookRemoteDataSource>()
     singleOf(::BookRepositoryImpl).bind<BookRepository>()
+    singleOf(::GeminiClient)
+    singleOf(::BookTutorRepositoryImpl).bind<BookTutorRepository>()
 
     single {
         get<FavoriteBookDatabaseFactory>().create()
