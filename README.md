@@ -29,11 +29,10 @@ Offipedia now features an intelligent **AI Mentor** designed to elevate the read
 
 ---
 ## Screen Recording
-<img width="360" height="766" alt="Screenshot 2026-03-22 at 00 21 12" src="https://github.com/user-attachments/assets/98c03681-4e14-4711-b15d-3c4309e06767" />
 <img width="359" height="769" alt="Screenshot 2026-03-22 at 00 20 53" src="https://github.com/user-attachments/assets/832fd60f-5564-403b-853c-5a694aa7f566" />
 <img width="353" height="762" alt="Screenshot 2026-03-22 at 00 20 37" src="https://github.com/user-attachments/assets/b1167356-8e83-42bc-9c9f-e8b24a1fd201" />
 <img width="404" height="782" alt="Screenshot 2026-03-22 at 00 18 50" src="https://github.com/user-attachments/assets/bd8203c4-deed-4632-a64c-810d20a678a2" />
-<im
+
 
 https://github.com/user-attachments/assets/093c369a-2ff6-473e-89e8-722ef88ce84a
 
