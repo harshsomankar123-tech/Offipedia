@@ -87,7 +87,10 @@ class BookListViewModel(
 
     private fun searchBooks(query: String) = viewModelScope.launch {
         _state.update { 
-            it.copy(isLoading = true) 
+            it.copy(
+                isLoading = true,
+                aiSummary = null
+            ) 
         }
         bookRepository
             .searchBooks(query)
@@ -99,7 +102,7 @@ class BookListViewModel(
                         searchResults = results
                     )
                 }
-                if (results.isNotEmpty() && query != "trending") {
+                if (results.isNotEmpty()) {
                     generateAiSummary(query, results)
                 }
             }

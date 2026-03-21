@@ -273,7 +273,9 @@ fun BookListScreen(
                                         onBookClick = {
                                             onAction(BookListAction.OnBookClick(it))
                                         },
-                                        modifier = Modifier.fillMaxSize(),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .weight(1f),
                                         emptyMessage = if (state.errorMessage != null) {
                                             state.errorMessage.asString()
                                         } else {
