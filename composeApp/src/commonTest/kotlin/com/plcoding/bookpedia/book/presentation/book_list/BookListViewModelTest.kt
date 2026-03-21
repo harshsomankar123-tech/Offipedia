@@ -4,6 +4,7 @@ import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.core.domain.DataError
 import com.plcoding.bookpedia.core.domain.Result
+import com.plcoding.bookpedia.book.domain.BookTutorRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -24,18 +25,28 @@ class FakeBookRepository : BookRepository {
     override suspend fun deleteFromFavorites(id: String) {}
 }
 
+class FakeBookTutorRepository : BookTutorRepository {
+    override val lastError: String? = null
+    override suspend fun getBookSummary(book: Book): Result<String, DataError.Remote> = Result.Success("Fake Summary")
+    override suspend fun getRecommendations(book: Book): Result<List<String>, DataError.Remote> = Result.Success(listOf("Rec 1", "Rec 2"))
+    override suspend fun getSearchSummary(query: String, books: List<Book>): Result<String, DataError.Remote> = Result.Success("Search summary for $query")
+    override suspend fun getCustomResponse(prompt: String): Result<String, DataError.Remote> = Result.Success("Fake Custom Response")
+}
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class BookListViewModelTest {
 
     private lateinit var viewModel: BookListViewModel
     private lateinit var repository: FakeBookRepository
+    private lateinit var tutorRepository: FakeBookTutorRepository
     private val testDispatcher = StandardTestDispatcher()
 
     @BeforeTest
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         repository = FakeBookRepository()
-        viewModel = BookListViewModel(repository)
+        tutorRepository = FakeBookTutorRepository()
+        viewModel = BookListViewModel(repository, tutorRepository)
     }
 
     @AfterTest

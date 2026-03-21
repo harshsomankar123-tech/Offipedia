@@ -1,4 +1,4 @@
-# Offipedia 
+# Offipedia 📚
 
 [![codecov](https://codecov.io/gh/harshsomankar123-tech/Offipedia/graph/badge.svg)](https://codecov.io/gh/harshsomankar123-tech/Offipedia)
 
@@ -8,8 +8,9 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
-## Technical Highlights
+## ✨ Technical Highlights
 
+* **AI Reading Mentor:** Integrated Google Gemini AI to provide an interactive text-based chat mentor, auto-summaries, and context-aware reading recommendations natively within the app.
 * **Unified Codebase:** 100% Kotlin code sharing for UI, business logic, and data layers.
 * **Offline-First Strategy:** Local persistence using **Room KMP** with custom type converters for complex data structures.
 * **Reactive UI:** State management powered by `StateFlow` and MVI, providing a unidirectional data flow and deterministic UI states.
@@ -18,10 +19,8 @@ The project is architected with strict **Clean Architecture** principles and the
 * **Custom Serialization:** Includes a specialized `KSerializer` to handle inconsistent JSON responses (String vs. Object) from the Open Library API.
 
 ---
-##Screen Recording
 
-
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Component | Technology |
 | :--- | :--- |
@@ -29,12 +28,13 @@ The project is architected with strict **Clean Architecture** principles and the
 | **Networking** | [Ktor 3.0](https://ktor.io/) (Client-side API requests) |
 | **Database** | [Room KMP](https://developer.android.com/kotlin/multiplatform/room) (SQLite persistence) |
 | **Dependency Injection** | [Koin](https://insert-koin.io/) (Compile-time safe DI) |
+| **AI Integration** | [Google Gemini API](https://ai.google.dev/) (Interactive AI Tutor & Summarization) |
 | **Image Loading** | [Coil 3](https://coil-kt.github.io/coil/) (Multiplatform image caching) |
 | **Concurrency** | Kotlin Coroutines & Flow |
 
 ---
 
-## Architecture Overview
+## 🏗️ Architecture Overview
 
 The project is structured into three distinct layers to maintain a strict separation of concerns:
 
@@ -44,7 +44,7 @@ The project is structured into three distinct layers to maintain a strict separa
 
 ---
 
-## CI/CD & Testing Infrastructure
+## 🚀 CI/CD & Testing Infrastructure
 
 The project's reliability is backed by a robust CI/CD pipeline and a high-quality test suite designed to catch regressions and maintain code health.
 
@@ -65,18 +65,10 @@ The project's reliability is backed by a robust CI/CD pipeline and a high-qualit
 * **UI Verification:**
   * **Snapshot Testing:** Integrated Paparazzi to catch UI regressions through automated screenshot comparisons.
   * **Instrumentation:** Established a foundation for Compose UI Testing running on real Android emulators in the cloud.
-    
 
 ---
-<img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/3f97fdaa-cadc-488b-a684-b537ad08dee1" />
 
-
-https://github.com/user-attachments/assets/58915edf-9d77-4d90-92a4-2a47ee178ff2
-
-
-
-
-## Development Setup
+## 💻 Development Setup
 
 ### Prerequisites
 * **Android Studio:** Ladybug or later.
@@ -87,10 +79,10 @@ https://github.com/user-attachments/assets/58915edf-9d77-4d90-92a4-2a47ee178ff2
 * **Android:** Select `composeApp` in the run configuration and click **Run**.
 * **Desktop:** Execute the following command in your terminal:
   ```bash
-  ./gradlew run
-  iOS: Open the iosApp configuration in Android Studio, or open the .xcworkspace file directly in Xcode.
+  ```
+* **iOS:** Open the `iosApp` configuration in Android Studio, or open the `.xcworkspace` file directly in Xcode.
 
-Running Tests Locally
+### Running Tests Locally
 You can verify the project's integrity locally using the following Gradle tasks:
 
 Unit Tests:

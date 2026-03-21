@@ -13,8 +13,11 @@ import kotlinx.coroutines.test.*
 import kotlin.test.*
 
 class FakeBookTutorRepository : BookTutorRepository {
+    override val lastError: String? = null
     override suspend fun getBookSummary(book: Book): Result<String, DataError.Remote> = Result.Success("Fake Summary")
     override suspend fun getRecommendations(book: Book): Result<List<String>, DataError.Remote> = Result.Success(listOf("Rec 1", "Rec 2"))
+    override suspend fun getSearchSummary(query: String, books: List<Book>): Result<String, DataError.Remote> = Result.Success("Search summary")
+    override suspend fun getCustomResponse(prompt: String): Result<String, DataError.Remote> = Result.Success("Fake Custom Response")
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
