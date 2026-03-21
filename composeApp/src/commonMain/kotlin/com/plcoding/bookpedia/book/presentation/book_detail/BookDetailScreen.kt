@@ -267,6 +267,46 @@ fun BookDetailScreen(
                             )
                         }
                     }
+
+                    if (state.isAiLoading || state.aiTutorSummary != null || state.aiRecommendations.isNotEmpty()) {
+                        Spacer(modifier = Modifier.height(32.dp))
+                        TitledDetail(
+                            title = "AI Tutor",
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            if (state.isAiLoading) {
+                                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+                            } else {
+                                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                                    state.aiTutorSummary?.let { summary ->
+                                        Text(
+                                            text = summary,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            textAlign = TextAlign.Justify
+                                        )
+                                    }
+                                    if (state.aiRecommendations.isNotEmpty()) {
+                                        Text(
+                                            text = "Recommendations",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                        FlowRow(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                        ) {
+                                            state.aiRecommendations.forEach { recommendation ->
+                                                SuggestionChip(
+                                                    onClick = {},
+                                                    label = { Text(text = recommendation) }
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } ?: Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

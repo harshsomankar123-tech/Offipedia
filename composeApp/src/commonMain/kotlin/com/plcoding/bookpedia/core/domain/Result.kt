@@ -37,3 +37,7 @@ inline fun <T, E: Error> Result<T, E>.onError(action: (E) -> Unit): Result<T, E>
         is Result.Success -> this
     }
 }
+
+fun <T, E: Error> Result<T, E>.getOrNull(): T? {
+    return (this as? Result.Success)?.data
+}
