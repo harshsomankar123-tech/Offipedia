@@ -20,12 +20,37 @@ The project is architected with strict **Clean Architecture** principles and the
 
 ---
 
+## 🤖 AI Mentor Integration
+
+Offipedia now features an intelligent **AI Mentor** designed to elevate the reading and discovery experience. Moving beyond standard search, the AI Mentor acts as a personalized reading companion.
+
+* **Smart Discovery:** Provides context-aware book recommendations based on user queries, genres, and reading history.
+* **Interactive Insights:** Allows users to ask questions about specific books, authors, or literary concepts, receiving instant, AI-generated summaries and explanations.
+* **Seamless Architecture:** The mentor's network calls and state are fully integrated into the existing MVI architecture, utilizing Kotlin Coroutines to ensure the UI remains fluid and non-blocking during prompt execution. 
+
+---
+## Screen Recording
+<img width="359" height="769" alt="Screenshot 2026-03-22 at 00 20 53" src="https://github.com/user-attachments/assets/832fd60f-5564-403b-853c-5a694aa7f566" />
+<img width="353" height="762" alt="Screenshot 2026-03-22 at 00 20 37" src="https://github.com/user-attachments/assets/b1167356-8e83-42bc-9c9f-e8b24a1fd201" />
+<img width="404" height="782" alt="Screenshot 2026-03-22 at 00 18 50" src="https://github.com/user-attachments/assets/bd8203c4-deed-4632-a64c-810d20a678a2" />
+
+
+https://github.com/user-attachments/assets/093c369a-2ff6-473e-89e8-722ef88ce84a
+
+
+
+https://github.com/user-attachments/assets/dc1992bc-38df-4d9b-ba85-2872caa6ec62
+
+g width="355" height="765" alt="Screenshot 2026-03-22 at 00 18 38" src="https://github.com/user-attachments/assets/83cfa82d-db4f-4153-a5d0-59fc6f626c05" />
+
+
 ## 🛠️ Tech Stack
 
 | Component | Technology |
 | :--- | :--- |
 | **Framework** | [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) |
 | **Networking** | [Ktor 3.0](https://ktor.io/) (Client-side API requests) |
+| **AI Integration** | *[Insert your LLM API here, e.g., Gemini API / OpenAI API]* |
 | **Database** | [Room KMP](https://developer.android.com/kotlin/multiplatform/room) (SQLite persistence) |
 | **Dependency Injection** | [Koin](https://insert-koin.io/) (Compile-time safe DI) |
 | **AI Integration** | [Google Gemini API](https://ai.google.dev/) (Interactive AI Tutor & Summarization) |
@@ -83,25 +108,24 @@ The project's reliability is backed by a robust CI/CD pipeline and a high-qualit
 * **iOS:** Open the `iosApp` configuration in Android Studio, or open the `.xcworkspace` file directly in Xcode.
 
 ### Running Tests Locally
+  ./gradlew run
+  Running Tests Locally
 You can verify the project's integrity locally using the following Gradle tasks:
 
 Unit Tests:
-```bash
-./gradlew test
-```
 
+Bash
+./gradlew test
 Generate Coverage Report: (View results in composeApp/build/reports/kover/html)
 
 Bash
-```./gradlew koverXmlReport```
-Linting: 
-bash
-```./gradlew detekt```
+./gradlew koverXmlReport
+Linting: ```bash
+./gradlew detekt
 
-Snapshot Verification: 
-bash
-```./gradlew verifyPaparazziDebug```
 
+**Snapshot Verification:** ```bash
+./gradlew verifyPaparazziDebug
 
 👨‍💻 Author
 Harsh Somankar
