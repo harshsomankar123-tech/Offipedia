@@ -71,6 +71,8 @@ fun BookListScreen(
     val density = androidx.compose.ui.platform.LocalDensity.current
     val maxHeaderHeight = 180.dp
     val maxHeaderHeightPx = with(density) { maxHeaderHeight.toPx() }
+    val searchBarHeight = 88.dp
+    val searchBarHeightPx = with(density) { searchBarHeight.toPx() }
     var headerOffsetHeightPx by remember { mutableStateOf(0f) }
 
     val nestedScrollConnection = remember {
@@ -150,7 +152,7 @@ fun BookListScreen(
                 .graphicsLayer {
                     // Start below the search bar. 
                     // Search bar total height is roughly 56 (bar) + 32 (vertical padding) = 88.dp
-                    translationY = headerOffsetHeightPx + maxHeaderHeightPx + with(density) { 88.dp.toPx() }
+                    translationY = headerOffsetHeightPx + maxHeaderHeightPx + searchBarHeightPx
                 },
             color = MaterialTheme.colorScheme.surface,
             shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
@@ -227,7 +229,13 @@ fun BookListScreen(
                                     onBookClick = {
                                         onAction(BookListAction.OnBookClick(it))
                                     },
-                                    modifier = Modifier.fillMaxSize(),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .graphicsLayer {
+                                            if (state.searchResults.isEmpty() && !state.isLoading) {
+                                                translationY = -(headerOffsetHeightPx + maxHeaderHeightPx + searchBarHeightPx) / 2
+                                            }
+                                        },
                                     emptyMessage = if (state.errorMessage != null) {
                                         state.errorMessage.asString()
                                     } else {
@@ -241,7 +249,13 @@ fun BookListScreen(
                                 onBookClick = {
                                     onAction(BookListAction.OnBookClick(it))
                                 },
-                                modifier = Modifier.fillMaxSize(),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .graphicsLayer {
+                                        if (state.favoriteBooks.isEmpty()) {
+                                            translationY = -(headerOffsetHeightPx + maxHeaderHeightPx + searchBarHeightPx) / 2
+                                        }
+                                    },
                                 emptyMessage = "You haven't added any favorites yet."
                             )
                         }
