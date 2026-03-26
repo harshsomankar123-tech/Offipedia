@@ -115,17 +115,17 @@ You can verify the project's integrity locally using the following Gradle tasks:
 Unit Tests:
 
 Bash
-./gradlew test
+```./gradlew test```
 Generate Coverage Report: (View results in composeApp/build/reports/kover/html)
 
 Bash
 ./gradlew koverXmlReport
-Linting: ```bash
-./gradlew detekt
+Linting: ```
+./gradlew detekt```
 
 
-**Snapshot Verification:** ```bash
-./gradlew verifyPaparazziDebug
+**Snapshot Verification:** ```
+./gradlew verifyPaparazziDebug```
 
 Author
 Harsh Somankar
