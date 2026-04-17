@@ -1,0 +1,22 @@
+coverage:
+  status:
+    project:
+      default:
+        # Require overall coverage to not drop by more than 1%
+        target: auto
+        threshold: 1%
+    patch:
+      default:
+        # Require new code to have at least 80% coverage
+        target: 80%
+        threshold: 0%
+
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: no # Show comment even if coverage doesn't change
+  
+codecov:
+  notify:
+    after_n_builds: 1
+    wait_for_ci: yes
