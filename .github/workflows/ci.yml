@@ -75,11 +75,12 @@ jobs:
       - name: Run Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
-          target: default
+          api-level: 33
+          target: google_apis
           arch: arm64-v8a
+          profile: pixel_6
           force-avd-creation: true
           emulator-boot-timeout: 2700
-          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -no-snapshot-save
+          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -no-snapshot-save -gpu swiftshader_indirect
           disable-animations: true
           script: ./gradlew connectedCheck
