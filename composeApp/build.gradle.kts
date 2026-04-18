@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.kotlin.test.junit)
             implementation(libs.junit)
             implementation(libs.robolectric)
+            implementation(libs.androidx.test.core)
             implementation(libs.mockk.android)
         }
     }
