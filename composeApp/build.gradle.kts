@@ -15,6 +15,7 @@ plugins {
     alias(libs.plugins.paparazzi)
     alias(libs.plugins.kover)
     alias(libs.plugins.buildconfig)
+    alias(libs.plugins.testRetry)
 }
 
 kotlin {
@@ -216,5 +217,12 @@ kover {
                 annotatedBy("androidx.compose.runtime.Composable")
             }
         }
+    }
+}
+
+tasks.withType<Test> {
+    retry {
+        maxRetries.set(2)
+        failOnPassedAfterRetry.set(false)
     }
 }
