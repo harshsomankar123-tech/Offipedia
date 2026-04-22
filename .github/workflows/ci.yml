@@ -42,8 +42,36 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Cache Flaky Test History
+        uses: actions/cache@v4
+        with:
+          path: flaky-tests.json
+          key: flaky-tests-${{ github.run_id }}
+          restore-keys: |
+            flaky-tests-
+
       - name: Run Unit Tests
         run: ./gradlew test
+
+      - name: Run Flaky Test Reporter
+        run: ./gradlew runFlakyReporter
+        if: always()
+
+      - name: Post Flaky Report to Summary
+        run: |
+          if [ -f flaky-report.md ]; then
+            cat flaky-report.md >> $GITHUB_STEP_SUMMARY
+          fi
+        if: always()
+
+      - name: Upload Flaky Report Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: flaky-test-report
+          path: |
+            flaky-report.md
+            flaky-tests.json
+        if: always()
 
       - name: Generate Coverage Report
         run: ./gradlew koverXmlReport

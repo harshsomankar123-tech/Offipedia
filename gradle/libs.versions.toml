@@ -94,3 +94,4 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.4.0" }
+testRetry = { id = "org.gradle.test-retry", version = "1.6.4" }
